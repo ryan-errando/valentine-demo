@@ -139,17 +139,14 @@
             }
 
             function showStep(stepIndex) {
-                // Hide all steps
                 document.querySelectorAll('.step').forEach(step => {
                     step.classList.remove('visible');
                 });
                 
-                // Show the current step
                 const stepToShow = document.getElementById(steps[stepIndex]);
                 stepToShow.classList.add('visible');
             }
 
-            // Add event listeners to all yes and no buttons
             document.querySelectorAll('.yes-button').forEach(button => {
                 button.addEventListener('click', () => {
                     currentStep++;
