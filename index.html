@@ -29,7 +29,7 @@
         }
 
         .heart-image {
-            width: 300px;
+            width: 150px;
             height: auto;
             margin-bottom: 20px;
         }
@@ -50,7 +50,7 @@
             background-color: #cc0000;
         }
 
-        .step {
+        #thankYouPage {
             position: fixed;
             top: 0;
             left: 0;
@@ -66,97 +66,62 @@
             transition: opacity 0.5s ease;
         }
 
-        .step.visible {
+        #thankYouPage.visible {
             opacity: 1;
             visibility: visible;
         }
 
-        .step h1 {
-            font-size: 48px;
+        #thankYouPage h1 {
+            font-size: 60px;
             color: #ff4d4d;
-            margin-bottom: 20px;
-            max-width: 800px;
+            margin-bottom: 10px;
         }
 
-        .step p {
+        #thankYouPage p {
             font-size: 24px;
             color: #cc0000;
-        }
-
-        #finalPage h1 {
-            font-size: 60px;
         }
     </style>
 </head>
 <body>
-    <div class="step visible" id="step1">
+    <div class="container" id="mainContainer">
         <h1>Will you be my Valentine?</h1>
-        <img src="picture.jpg" alt="Cute Cat Valentine" class="heart-image">
+        <img src="picture.jpg" alt="Heart" class="heart-image">
         <div>
-            <button class="yes-button">Yes</button>
-            <button class="no-button">No</button>
+            <button id="yesButton">Yes</button>
+            <button id="noButton">No</button>
         </div>
     </div>
 
-    <div class="step" id="step2">
-        <h1>Are you sure?</h1>
-        <img src="picture.jpg" alt="Cute Cat Valentine" class="heart-image">
-        <div>
-            <button class="yes-button">Yes</button>
-            <button class="no-button">No</button>
-        </div>
-    </div>
-
-    <div class="step" id="step3">
-        <h1>But I'm broke... Are you pretty sure you want to spend your Valentine's with me?</h1>
-        <img src="picture.jpg" alt="Cute Cat Valentine" class="heart-image">
-        <div>
-            <button class="yes-button">Yes</button>
-            <button class="no-button">No</button>
-        </div>
-    </div>
-
-    <div class="step" id="finalPage">
+    <div id="thankYouPage">
         <h1>Thank You!</h1>
         <p>I'm so happy! ❤️</p>
-        <img src="picture.jpg" alt="Cute Cat Valentine" class="heart-image">
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const steps = ['step1', 'step2', 'step3', 'finalPage'];
-            let currentStep = 0;
+            const noButton = document.getElementById('noButton');
+            const yesButton = document.getElementById('yesButton');
+            const thankYouPage = document.getElementById('thankYouPage');
+            const mainContainer = document.getElementById('mainContainer');
 
-            function moveNoButton(button) {
+            function moveNoButton() {
                 const screenWidth = window.innerWidth;
                 const screenHeight = window.innerHeight;
                 const randomX = Math.random() * (screenWidth - 150);
                 const randomY = Math.random() * (screenHeight - 50);
-                
-                button.style.position = 'fixed';
-                button.style.left = `${randomX}px`;
-                button.style.top = `${randomY}px`;
+
+                noButton.style.position = 'fixed';
+                noButton.style.left = `${randomX}px`;
+                noButton.style.top = `${randomY}px`;
             }
 
-            function showStep(stepIndex) {
-                document.querySelectorAll('.step').forEach(step => {
-                    step.classList.remove('visible');
-                });
-                
-                const stepToShow = document.getElementById(steps[stepIndex]);
-                stepToShow.classList.add('visible');
-            }
+            noButton.addEventListener('mouseover', moveNoButton);
+            noButton.addEventListener('click', moveNoButton);
 
-            document.querySelectorAll('.yes-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    currentStep++;
-                    showStep(currentStep);
-                });
-            });
-
-            document.querySelectorAll('.no-button').forEach(button => {
-                button.addEventListener('mouseover', () => moveNoButton(button));
-                button.addEventListener('click', () => moveNoButton(button));
+            yesButton.addEventListener('click', () => {
+                mainContainer.style.display = 'none';
+                thankYouPage.classList.add('visible');
             });
         });
     </script>
